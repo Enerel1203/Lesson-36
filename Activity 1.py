@@ -13,9 +13,9 @@ background= pygame.image.load('background.png')
 mixer.music.load('background.wav')
 mixer.music.play(-1)
 
-pygame.display.set_captain('Space Invader')
+pygame.display.set_caption('Space Invader')
 icon= pygame.image.load('ufo.png')
-pygame.displat.set_icon(icon)
+pygame.display.set_icon(icon)
 
 playerImg = pygame.image.load('player.png')
 playerX = 370
@@ -42,18 +42,18 @@ bulletY_change = 10
 bullet_state = "ready"
 
 score_value = 0
-font= pygame.fonr.Font('freesansbold.ttf', 32)
+font= pygame.font.Font('freesansbold.ttf', 32)
 
 testX = 10
 testY = 10
 
-over_font= pygame.font.Font('freesanbold.ttf', 64)
+over_font= pygame.font.Font('freesansbold.ttf', 64)
 
 def show_score(x, y):
     score = font.render("Score: "+ str(score_value), True, (255, 255, 255))
     screen.blit(score, (x, y))
 
-def game_over_ext():
+def game_over_text():
     over_text = over_font.render("GAME OVER", True, (255, 255, 255))
     screen.blit(over_text, (200, 250))
 
@@ -80,7 +80,7 @@ while running:
     screen.fill((0, 0, 0))
     screen.blit(background, (0, 0))
     for event in pygame.event.get():
-        if event-type == pygame.QUIT:
+        if event.type == pygame.QUIT:
             running = False
 
         if event.type == pygame.KEYDOWN:
@@ -89,7 +89,7 @@ while running:
             if event.key == pygame.K_RIGHT:
                 playerX_change = 5
             if event.key == pygame.K_SPACE:
-                if bullet_state is 'ready':
+                if bullet_state == 'ready':
                     bulletSound = mixer.Sound('laser.wav')
                     bulletSound.play()
                     bulletX = playerX
@@ -109,7 +109,7 @@ while running:
         if enemyY[i] > 340:
             for j in range(num_of_enemies):
                 enemyY[j] = 2000
-            game_over_ext
+            game_over_text()
             break
 
         enemyX[i] += enemyX_change[i]
